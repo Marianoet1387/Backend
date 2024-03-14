@@ -8,7 +8,7 @@
 			},
 			{
 				"productId": 710948,
-				"quantity": 2
+				"quantity": 6
 			}
 		]
 	},
@@ -24,5 +24,9 @@
 				"quantity": 1
 			}
 		]
+	},
+	{
+		"id": 84572,
+		"products": []
 	}
 ]

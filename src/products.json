@@ -28,5 +28,15 @@
 		"code": "c",
 		"stock": 1,
 		"status": true
+	},
+	{
+		"id": 855378,
+		"title": "producto Nuevo Nuevo",
+		"description": "Nuevo",
+		"price": "700",
+		"thumbnail": "sin imagen",
+		"code": "L",
+		"stock": 25,
+		"status": true
 	}
 ]

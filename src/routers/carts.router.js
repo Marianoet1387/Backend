@@ -8,7 +8,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 const cartManager = new ProductManager(`${__dirname}/../cart.json`);
-const productManager = new ProductManager(`${__dirname}/../products.json`)
 
 router.post("/", async (req, res) => {
     try {
