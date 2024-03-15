@@ -1,0 +1,32 @@
+<div>
+    <form action="/view.router" method="post" enctype="application/x-www-form-urlencoded">
+        <div>
+            <p>title</p>
+            <input type="text" name="title">
+
+            <p>description</p>
+            <input type="text" name="description">
+
+            <p>price</p>
+            <input type="number" name="price">
+
+            <p>Image</p>
+            <input type="text" name="thumbnail">
+
+            <p>stock</p>
+            <input type="text" name="stock">
+
+            <p></p>
+            <input type="submit" id="addProduct" value="Agregar">
+        </div>
+    </form>
+</div>
+
+<div id="productsFeed">
+    <h3>Productos:</h3>
+    <ul>
+        {{#each products}}
+        <li> id: {{id}}, title: {{title}},description: {{description}}, price: {{price}},thumbnail: {{thumbnail}}, title: {{code}},stock: {{stock}} </li>
+        {{/each}}
+    </ul>
+</div>

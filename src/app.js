@@ -2,7 +2,8 @@ const productsRouter = require('./routers/products.router')
 const cartsRouter = require('./routers/carts.router')
 const viewsRouter = require('./routers/view.router')
 const express = require('express');
-const handlebars = require('express-handlebars')
+const handlebars = require('express-handlebars');
+const { Server } = require('socket.io');
 const app = express();
 
 app.engine('handlebars', handlebars.engine())
@@ -18,8 +19,15 @@ app.use('/api/products', productsRouter)
 app.use("/api/carts",cartsRouter)
 app.use("/api/views",viewsRouter)
 
-app.listen(8080, () => {
+const httpServer = app.listen(8080, () => {
     console.log('Servidor escuchando en el puerto 8080.');
 });
+const wsServer= new Server(httpServer)
+app.set("ws", wsServer)
+
+wsServer.on("connection", (socket)=>{
+    console.log("Nuevo cliente conectado via ws")
+
+})
 
 
