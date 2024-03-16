@@ -16,7 +16,6 @@
             <p>stock</p>
             <input type="text" name="stock">
 
-            <p></p>
             <input type="submit" id="addProduct" value="Agregar">
         </div>
     </form>
@@ -26,7 +25,7 @@
     <h3>Productos:</h3>
     <ul>
         {{#each products}}
-        <li> id: {{id}}, title: {{title}},description: {{description}}, price: {{price}},thumbnail: {{thumbnail}}, title: {{code}},stock: {{stock}} </li>
+        <li> title: {{title}},description: {{description}}, price: {{price}},thumbnail: {{thumbnail}}, title: {{code}},stock: {{stock}} </li>
         {{/each}}
     </ul>
 </div>

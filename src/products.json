@@ -38,5 +38,25 @@
 		"code": "L",
 		"stock": 25,
 		"status": true
+	},
+	{
+		"id": 958700,
+		"title": "Prd Nuevo",
+		"description": "descripcion",
+		"price": "200",
+		"thumbnail": "sin imagen",
+		"code": "G",
+		"stock": 25,
+		"status": true
+	},
+	{
+		"id": 238464,
+		"title": " Nuevo",
+		"description": "descripcion",
+		"price": "200",
+		"thumbnail": "sin imagen",
+		"code": "T",
+		"stock": 2,
+		"status": true
 	}
 ]

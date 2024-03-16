@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const express = require('express');
+const router = Router()
 
 const ProductManager = require(`${__dirname}/../productManager`);
-const router = Router()
 const app = express();
 
 app.use(express.json())
@@ -14,7 +14,6 @@ router.get('/', async (_, res) => {
     try {
         const products = await productManager.getProducts();
         const prodcutsData = products.map(p=>({
-            id: p.id,
             title: p.title,
             description: p.description,
             thumbnail: p.thumbnail,
@@ -25,7 +24,7 @@ router.get('/', async (_, res) => {
         res.render("realTimeProducts" ,{
             products : prodcutsData,
             titleHead:"Productos",
-            //script:[realTimeProducts.js] ,
+            scripts:["realTimeProducts.js"] ,
             useWS: true
     }) 
     } catch (error) {
@@ -33,15 +32,15 @@ router.get('/', async (_, res) => {
         res.status(404).json({ status:"succes", messege:"Products not found" });
     }
 })
-router.post("/",async (req,res) => {
+router.post('/',async(req, res) => {
     try {
         console.log(req.body)   
         const addProd = req.body
-        await productManager.addproduct(addProd)
+        const newProduct = await productManager.addProduct(addProd)
 
-        req.app.get("ws").emit("newProduct", addProd)
+        req.app.get("ws").emit("newProduct", newProduct)
 
-        res.json(addProd)   
+        res.json(newProduct)   
         
     } catch (error) {
         throw error

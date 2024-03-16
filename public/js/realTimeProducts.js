@@ -1,4 +1,4 @@
-const socket = io()
+const socket = io(); // Conectarse al servidor
 
 //  Browser:
 
@@ -9,7 +9,7 @@ socket.on("newProduct", (p) => {
         <div>
             <h3>Productos:</h3>
             <ul>
-                <li> id: ${p.id}, title: ${p.title},description: ${p.description}, price: ${price},thumbnail: ${thumbnail}, code: ${p.code},stock: ${p.stock} </li>
+                <li> title: ${p.title},description: ${p.description}, price: ${price},thumbnail: ${thumbnail}, code: ${p.code},stock: ${p.stock} </li>
             </ul>
         </div>
     
