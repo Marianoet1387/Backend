@@ -1,20 +1,23 @@
 <div>
-    <form action="/view.router" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="/realTimeProducts" id="Form" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <p>title</p>
-            <input type="text" name="title">
+            <p>Title</p>
+            <input type="text" id="Name" name="title">
 
-            <p>description</p>
-            <input type="text" name="description">
+            <p>Description</p>
+            <input type="text" id="Description" :name="description">
 
-            <p>price</p>
-            <input type="number" name="price">
+            <p>Price</p>
+            <input type="number" id="Number" name="price">
 
             <p>Image</p>
-            <input type="text" name="thumbnail">
+            <input type="text" id="thumbnail" name="thumbnail">
 
-            <p>stock</p>
-            <input type="text" name="stock">
+            <p>Stock</p>
+            <input type="text" id="Stock" name="stock">
+
+            <p>Code</p>
+            <input type="text" id="Code" name="code">
 
             <input type="submit" id="addProduct" value="Agregar">
         </div>
