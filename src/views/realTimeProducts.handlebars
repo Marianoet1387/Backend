@@ -1,11 +1,12 @@
-<div>
-    <form action="/realTimeProducts" id="Form" method="post" enctype="application/x-www-form-urlencoded">
+<div class="container-form">
+    <h1>Agregar un nuevo producto</h1>
+    <form  action="/api/realTimeProducts" id="Form" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <p>Title</p>
             <input type="text" id="Name" name="title">
 
             <p>Description</p>
-            <input type="text" id="Description" :name="description">
+            <input type="text" id="Description" name="description">
 
             <p>Price</p>
             <input type="number" id="Number" name="price">
@@ -14,7 +15,7 @@
             <input type="text" id="thumbnail" name="thumbnail">
 
             <p>Stock</p>
-            <input type="text" id="Stock" name="stock">
+            <input type="number" id="Stock" name="stock">
 
             <p>Code</p>
             <input type="text" id="Code" name="code">
@@ -24,11 +25,28 @@
     </form>
 </div>
 
-<div id="productsFeed">
-    <h3>Productos:</h3>
-    <ul>
-        {{#each products}}
-        <li> title: {{title}},description: {{description}}, price: {{price}},thumbnail: {{thumbnail}}, title: {{code}},stock: {{stock}} </li>
-        {{/each}}
-    </ul>
+
+<h3>Lista de productos:</h3>
+<div class="container" id="productsFeed">
+    {{#each products}}
+   <div class="div-card">
+            <div class="title">
+                <p>{{title}}</p>
+            </div>
+            <div class="image">
+                <p>{{thumbnail}}</p>
+            </div>
+            <div class="description">
+                <p>Descripcion: {{description}}</p>
+            </div>
+            <div class="price">
+                <p>Precio: ${{price}}</p>
+            </div>
+            <div class="code-stock">
+                <p>Codigo: {{code}}</p>
+                <p>Stock: {{stock}}</p>
+            </div>
+        </div>
+    {{/each}}
 </div>
+

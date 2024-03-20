@@ -24,6 +24,7 @@ router.get('/', async (_, res) => {
         res.render("home" ,{
             products : prodcutsData,
             titleHead:"Productos",
+            styles:["styles.css"]
     }) 
     } catch (error) {
         res.status(404).json({ status:"succes", messege:"Products not found" });

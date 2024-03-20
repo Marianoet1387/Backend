@@ -25,26 +25,36 @@ router.get('/', async (_, res) => {
             products : prodcutsData,
             titleHead:"Productos",
             scripts:["realTimeProducts.js"] ,
+            styles:["styles.css"],
             useWS: true
     }) 
     } catch (error) {
-        throw error
         res.status(404).json({ status:"succes", messege:"Products not found" });
     }
 })
 router.post('/',async(req, res) => {
     try {
-        console.log(req.body)
         const addProd = req.body
-        const newProduct = await productManager.addProduct(addProd)
-     
-        req.app.get("ws").emit("newProduct", newProduct)
-        res.json(addProd)    
+        await productManager.addProduct(addProd)
+        req.app.get('ws').emit('newProduct', addProd)
+        res.status(202).redirect("/api/realTimeProducts");    
     } catch (error) {
-        throw error
-        res.status(404).json({ status:"succes", messege:"Products not found" });
+        res.status(404).json({ status:"succes", messege:"Product could not be added"});
     }
 })
+
+router.delete('/:pid', async(req, res)=>{
+    try {
+        const id = +req.params.pid;
+        await productManager.deleteProduct(id);
+        const products = await productManager.getProducts();
+        req.app.get("ws").emit('updateProducts', products)
+        res.status(202).redirect("/api/realTimeProducts");
+    } catch (error) {
+        res.status(400).json({status:"error", messege:"The product could not be deleted" });
+    }
+} )
+
 
 
 module.exports = router

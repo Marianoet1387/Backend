@@ -1,8 +1,24 @@
-<div id="productsFeed">
-    <h3>Productos:</h3>
-    <ul>
+<h1>Lista de Productos:</h1>
+<div class="container" id="productsFeed">
         {{#each products}}
-        <li> title: {{title}},description: {{description}}, price: {{price}},thumbnail: {{thumbnail}}, title: {{code}},stock: {{stock}} </li>
+        <div class="div-card">
+            <div class="title">
+                <p>{{title}}</p>
+            </div>
+            <div class="image">
+                <p>{{thumbnail}}</p>
+            </div>
+            <div class="description">
+                <p>Descripcion: {{description}}</p>
+            </div>
+            <div class="price">
+                <p>Precio: ${{price}}</p>
+            </div>
+            <div class="code-stock">
+                <p>Codigo: {{code}}</p>
+                <p>Stock: {{stock}}</p>
+            </div>
+        </div>
         {{/each}}
-    </ul>
 </div>
+

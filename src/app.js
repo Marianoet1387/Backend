@@ -31,7 +31,6 @@ app.set("ws", wsServer)
 
 wsServer.on("connection", (socket) => {
     console.log(`Nuevo cliente conectado: ${socket.id}`)
-
 })
 
 

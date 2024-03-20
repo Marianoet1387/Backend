@@ -1,25 +1,5 @@
 [
 	{
-		"id": 406378,
-		"title": "producto Nuevo",
-		"description": "Nuevo",
-		"price": "700",
-		"thumbnail": "sin imagen",
-		"code": "a",
-		"stock": 25,
-		"status": true
-	},
-	{
-		"id": 678376,
-		"title": "producto Nuevo",
-		"description": "Nuevo",
-		"price": "700",
-		"thumbnail": "sin imagen",
-		"code": "b",
-		"stock": 25,
-		"status": true
-	},
-	{
 		"id": 710948,
 		"title": "Nueva actualizacion 1",
 		"description": "Nuevo",
@@ -40,23 +20,33 @@
 		"status": true
 	},
 	{
-		"id": 958700,
-		"title": "Prd Nuevo",
-		"description": "descripcion",
-		"price": "200",
-		"thumbnail": "sin imagen",
-		"code": "G",
-		"stock": 25,
+		"id": 579027,
+		"title": "Zapatillas Nike",
+		"description": "Para correr",
+		"price": "120",
+		"thumbnail": "nada",
+		"code": "abcd45",
+		"stock": "10",
 		"status": true
 	},
 	{
-		"id": 238464,
-		"title": " Nuevo",
-		"description": "descripcion",
-		"price": "200",
-		"thumbnail": "sin imagen",
-		"code": "T",
-		"stock": 2,
+		"id": 633971,
+		"title": "Iphone 15",
+		"description": "Movil",
+		"price": "1000",
+		"thumbnail": "sin ",
+		"code": "abcd123457",
+		"stock": "2",
+		"status": true
+	},
+	{
+		"id": 868952,
+		"title": "Remera Nike",
+		"description": "Ropa para entrenar",
+		"price": "40",
+		"thumbnail": "sin ",
+		"code": "abdc5559",
+		"stock": "10",
 		"status": true
 	}
 ]

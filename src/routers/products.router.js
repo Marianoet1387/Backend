@@ -44,9 +44,7 @@ router.post('/',async(req, res)=> {
         const addProd = req.body
         const newProduct = await productManager.addProduct(addProd)
         res.status(200).json(newProduct)
-        //res.status(202).json({ status:"succes", messege:"Added products" });
     } catch (error) {
-        throw error
         res.status(400).json({status:"error", messege:"Product could not be added" });
     }
 } )
@@ -65,7 +63,7 @@ router.put('/:pid',async(req, res)=> {
 router.delete('/:pid', async(req, res)=>{
     try {
         const id = +req.params.pid;
-        const getProdcutById = await productManager.deleteProduct(id);
+        await productManager.deleteProduct(id);
         res.status(202).json({ status:"succes", messege:"Product disposed correctly" });
     } catch (error) {
         res.status(400).json({status:"error", messege:"The product could not be deleted" });

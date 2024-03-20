@@ -40,11 +40,14 @@ class ProductManager {
         if (!title || !description || !price || !code || !stock) {
             throw new Error('Todos los campos son obligatorios.');
         }
-        if (price <= 0 || price === undefined ) {
-            throw new Error('El precio debe ser un numero positivo');
+        if (isNaN(price) && isNaN(stock))  {
+            throw new Error("La variable no es numérica");
+        } 
+        if (price <= 0 || stock < 0  ) {
+            throw new Error('El precio debe ser un numero positivo o el stock no debe ser un numero negativo');
         }
-        if (stock < 0 || stock === undefined ) {
-            throw new Error('El stock no debe ser un numero negativo');
+        if (!thumbnail) {
+            thumbnail = "sin imagen";
         }
         if (products.some(p => p.code === code)) {
             throw new Error(`El producto con el codigo ${code} ya existe`);
@@ -102,7 +105,10 @@ class ProductManager {
         if  (!title || !stock) {
             throw new Error('Todos los campos son obligatorios.');
         }
-        if (stock < 0 || stock === undefined ) {
+        if (isNaN(stock))  {
+            throw new Error("La variable no es numérica");
+        } 
+        if (stock < 0 ) {
             throw new Error('El stock no debe ser negativo');
         }
         let index = getProducts.findIndex(p => p.id === id)
