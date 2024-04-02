@@ -48,5 +48,15 @@
 		"code": "abdc5559",
 		"stock": "10",
 		"status": true
+	},
+	{
+		"id": 78764,
+		"title": "Zapatillas",
+		"description": "Futbol",
+		"price": "100",
+		"thumbnail": "Sin imagen",
+		"code": "abcd44",
+		"stock": "5",
+		"status": true
 	}
 ]

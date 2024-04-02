@@ -1,25 +1,18 @@
 const { Router } = require('express')
-const express = require('express');
 const router = Router()
 
-const ProductManager = require(`${__dirname}/../productManager`);
-const app = express();
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-
-const productManager = new ProductManager(`${__dirname}/../products.json`);
-
-router.get('/', async (_, res) => {
+router.get('/', async (req, res) => {
     try {
+        const productManager = req.app.get('productManager')
         const products = await productManager.getProducts();
         const prodcutsData = products.map(p=>({
+            id:p.id,
             title: p.title,
             description: p.description,
             thumbnail: p.thumbnail,
             price: p.price,
             stock: p.stock,
-            code: p.stock,
+            code: p.code,
         }))
         res.render("realTimeProducts" ,{
             products : prodcutsData,
@@ -34,6 +27,7 @@ router.get('/', async (_, res) => {
 })
 router.post('/',async(req, res) => {
     try {
+        const productManager = req.app.get('productManager')
         const addProd = req.body
         await productManager.addProduct(addProd)
         req.app.get('ws').emit('newProduct', addProd)
@@ -45,8 +39,9 @@ router.post('/',async(req, res) => {
 
 router.delete('/:pid', async(req, res)=>{
     try {
-        const id = +req.params.pid;
-        await productManager.deleteProduct(id);
+        const productManager = req.app.get('productManager')
+        const id = req.params.pid;
+        await productManager.deleteById(id);
         const products = await productManager.getProducts();
         req.app.get("ws").emit('updateProducts', products)
         res.status(202).redirect("/api/realTimeProducts");

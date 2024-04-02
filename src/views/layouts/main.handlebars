@@ -18,6 +18,11 @@
     {{#if useWS}}
     <script src="/socket.io/socket.io.js"></script>
     {{/if}}
+    
+    
+    {{#if useSweetAlert }}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{/if}}
 
     {{#each scripts }}
     <script src="/js/{{this}}"></script>

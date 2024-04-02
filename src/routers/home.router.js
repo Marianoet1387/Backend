@@ -1,17 +1,9 @@
 const { Router } = require('express')
-const express = require('express');
 const router = Router()
-const app = express();
 
-const ProductManager = require(`${__dirname}/../productManager`);
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-
-const productManager = new ProductManager(`${__dirname}/../products.json`);
-
-router.get('/', async (_, res) => {
+router.get('/', async (req, res) => {
     try {
+        const productManager = req.app.get('productManager')
         const products = await productManager.getProducts();
         const prodcutsData = products.map(p=>({
             title: p.title,
