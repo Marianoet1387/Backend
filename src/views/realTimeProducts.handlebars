@@ -28,7 +28,7 @@
 
 <h3>Lista de productos:</h3>
 <div class="container" id="productsFeed">
-    {{#each products}}
+    {{#each products.docs}}
    <div class="div-card"  id="id-{{id}}">
             <div class="title">
                 <p>{{title}}</p>
@@ -49,4 +49,14 @@
         </div>
     {{/each}}
 </div>
+<div>
+    Current page: {{products.page}}
+    {{#if products.hasPrevPage}}
+    <a href="/?page={{products.prevPage}}">Prev</a>
+    {{/if}}
 
+    {{#if products.hasNextPage}}
+    <a href="/?page={{products.nextPage}}">Next</a>
+    {{/if}}
+
+</div>

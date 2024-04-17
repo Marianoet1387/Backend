@@ -36,4 +36,19 @@ router.post("/:cid/product/:pid", async (req, res) => {
     }
 
 })
+
+router.delete('/:cid/products/:pid', async(req, res)=>{
+    try {
+        const productManager = req.app.get('productManager')
+        const cartId = req.params.cid
+        const productId = req.params.pid
+        await deleteProdCart(cartId,productId)
+        const products = await productManager.getProducts();
+        req.app.get("ws").emit('updateProducts', products)
+        res.status(202).redirect("/api/realTimeProducts");
+    } catch (error) {
+        res.status(400).json({status:"error", messege:"The product could not be deleted" });
+    }
+} )
+
 module.exports = router

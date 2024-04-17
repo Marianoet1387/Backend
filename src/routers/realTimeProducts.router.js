@@ -1,21 +1,36 @@
 const { Router } = require('express')
 const router = Router()
+const ProductModel = require('../dao/models/product.model')
 
 router.get('/', async (req, res) => {
     try {
-        const productManager = req.app.get('productManager')
-        const products = await productManager.getProducts();
-        const prodcutsData = products.map(p=>({
-            id:p.id,
-            title: p.title,
-            description: p.description,
-            thumbnail: p.thumbnail,
-            price: p.price,
-            stock: p.stock,
-            code: p.code,
-        }))
+        let { limit, page, query } = req.query;
+        
+        page = parseInt(page);
+        if (isNaN(page) || page < 1) {
+            page = 1;
+        }
+        
+        if (isNaN(limit) || limit <= 0) {
+            limit = 10;
+        }
+        // Filtros por descripcion de prod o stock (disponibilidad)
+        let filter = {};
+        
+        if (query === 'description') {
+            filter.description = "Futbol"; 
+        } else if (query === 'stock') {
+            filter.stock = { $gt: 0 }; 
+        } else {
+            filter = {}; 
+        }
+        
+        let options = { limit: limit, page: page, lean: true, sort: { price: -1 } };
+        
+        console.log(await ProductModel.paginate(filter, options))
+        const products = await ProductModel.paginate(filter, options);
         res.render("realTimeProducts" ,{
-            products : prodcutsData,
+            products : products,
             titleHead:"Productos",
             scripts:["realTimeProducts.js"] ,
             styles:["styles.css"],

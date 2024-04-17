@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const mongoosePaginate = require("mongoose-paginate-v2")
 const schema = new mongoose.Schema({
     title: {
         type: String,
@@ -24,15 +25,11 @@ const schema = new mongoose.Schema({
         type: Number,
         required:true
     },
-    // role:{
-    //     type:String,
-    //     required: true,
-    //     default: "user" // Por defuolt, sin ponerle ningun valor, se pone el dato user.
-    // }
-
 })
+schema.plugin(mongoosePaginate);
+
 schema.virtual("id").get(function () {
     return this._id.toString()
 })
 
-module.exports = mongoose.model("Product",schema,"products")
+module.exports = mongoose.model("Product",schema,"products");

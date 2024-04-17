@@ -1,6 +1,6 @@
 const ProductModel = require('../models/product.model')
 const CartModel = require("../models/cart.model")
-const MessageModel = require("../models/message.model")
+
 class ProductManager {
     constructor() { }
 
@@ -73,11 +73,19 @@ class ProductManager {
         return cart.toObject({ virtuals: true });
     }
 
-    async getMessage(){
-        return await MessageModel.find()
+    async deleteProdCart(cartId,prodId){ 
+        const cart = await CartModel.findById(cartId);
+        if (!cart) {
+            throw new Error("No se encontró un carrito con el ID proporcionado");
+        }
+        cart.toObject({ virtuals: true });
+        const existingProduct = cart.products.find(p => p.prodId === prodId);
+        if (existingProduct) {
+            return ProductModel.deleteOne({ _id: prodId })
+        }
     }
-    async saveMessage(username,message){
-        return await MessageModel.create({username, message})
-    } 
+    async deleteByCartId(id) {
+        return CartModel.deleteOne({ _id: id })
+    }
 }
 module.exports = ProductManager

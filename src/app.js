@@ -10,7 +10,7 @@ const productsRouter = require('./routers/products.router')
 const cartsRouter = require('./routers/carts.router')
 const realTimeProductsRouter = require('./routers/realTimeProducts.router')
 const homeRouter = require('./routers/home.router')
-const chatRouter = require('./routers/views.router')
+
 const app = express();
 
 app.engine('handlebars', handlebars.engine())
@@ -26,7 +26,6 @@ app.use('/api/products', productsRouter)
 app.use("/api/carts", cartsRouter)
 app.use('/api/home', homeRouter)
 app.use("/api/realTimeProducts", realTimeProductsRouter)
-app.use("/api/chat", chatRouter)
 
 const main = async () => {
 
@@ -45,35 +44,6 @@ const main = async () => {
     const wsServer = new Server(httpServer)
     app.set("ws", wsServer)
 
-    wsServer.on("connection", async (socket) => {
-        console.log(`Nuevo cliente conectado: ${socket.id}`)
-        // Recuperar todos los mensajes de la base de datos
-        try {
-            const messages = await productManager.getMessage()
-            // Enviar los mensajes al cliente recién conectado
-            messages.forEach(message => {
-                socket.emit("message", { username: message.username, message: message.message });
-            });
-        } catch (error) {
-            console.error("Error al recuperar los mensajes de la base de datos:", error);
-        }
-
-        socket.on("message", async (data) => {
-            const { username, message } = data;
-            // Guardar el mensaje en la base de datos
-            try {
-                await productManager.saveMessage(username,message)
-            } catch (error) {
-                console.error("Error al guardar el mensaje en la base de datos:", error);
-            }
-            // Emitir el mensaje a todos los clientes conectados
-            wsServer.emit("message", data);
-        });
-
-        socket.on("user-connected", (username) => {
-            // Notificar a los otros usuarios que se conectó un usuario
-            socket.broadcast.emit("user-joined-chat", username);
-        });
-    })
+   
 }
 main()
