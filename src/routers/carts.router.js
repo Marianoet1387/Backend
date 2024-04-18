@@ -14,13 +14,15 @@ router.post("/", async (req, res) => {
 router.get("/:cid", async (req, res) => {
     try {
         const cartManager = req.app.get('productManager')
-        const id = req.params.cid
-        const getCartById = await cartManager.getCartById(id);
-        data = {
-            ...getCartById
-        }
-        res.status(202).json({status:"succes", messege:"Products found", data});
+        const cartId = req.params.cid
+        const getCartById = await cartManager.getCartById(cartId);
+        console.log(getCartById)
+        // data = {
+        //     ...getCartById
+        // }
+        res.status(202).json({status:"succes", messege:"Products found", getCartById});
     } catch (error) {
+        throw error
         res.status(404).json({ status: "error", messege: "Products not found" });
     }
 })

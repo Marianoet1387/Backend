@@ -42,10 +42,10 @@ class ProductManager {
     
     async addCart() {
             await CartModel.create({ products: [] })
-    
     }
-    async getCartById(id) {
-        const cart = await CartModel.findById(id);
+   
+    async getCartById(cartId) {
+        const cart = await CartModel.findById(cartId).populate('products.prodId');
         if (!cart) {
             throw new Error("No se encontró un carrito con el ID proporcionado");
         }
@@ -84,6 +84,7 @@ class ProductManager {
         // Guardar el carrito actualizado en la base de datos
         await cart.save();
     }
+
     async deleteOneProdCart(cartId, prodId) {
         const cart = await CartModel.findById(cartId);
         if (!cart) {
