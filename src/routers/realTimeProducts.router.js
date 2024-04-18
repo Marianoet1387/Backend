@@ -55,8 +55,8 @@ router.post('/',async(req, res) => {
 router.delete('/:pid', async(req, res)=>{
     try {
         const productManager = req.app.get('productManager')
-        const id = req.params.pid;
-        await productManager.deleteById(id);
+        const pid = req.params.pid;
+        await productManager.deleteById(pid);
         const products = await productManager.getProducts();
         req.app.get("ws").emit('updateProducts', products)
         res.status(202).redirect("/api/realTimeProducts");
