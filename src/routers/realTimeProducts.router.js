@@ -15,16 +15,14 @@ router.get('/', async (req, res) => {
             limit = 10;
         }
         // Filtros por descripcion de prod o stock (disponibilidad)
+
         let filter = {};
-        
-        if (query === 'description') {
-            filter.description = "Futbol"; 
-        } else if (query === 'stock') {
+        if (query === 'stock') {
             filter.stock = { $gt: 0 }; 
-        } else {
-            filter = {}; 
+        } else if (query) {
+            filter.description = new RegExp(query, 'i'); // 'i' búsqueda insensible a mayúsculas y minúsculas
         }
-        
+
         let options = { limit: limit, page: page, lean: true, sort: { price: -1 } };
         
         console.log(await ProductModel.paginate(filter, options))
@@ -35,7 +33,7 @@ router.get('/', async (req, res) => {
             scripts:["realTimeProducts.js"] ,
             styles:["styles.css"],
             useWS: true
-    }) 
+        }) 
     } catch (error) {
         res.status(404).json({ status:"succes", messege:"Products not found" });
     }

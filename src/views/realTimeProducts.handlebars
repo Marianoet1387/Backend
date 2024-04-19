@@ -46,17 +46,18 @@
                 <p>Codigo: {{code}}</p>
                 <p>Stock: {{stock}}</p>
             </div>
+            <button>Agregar a carrito</button>
         </div>
     {{/each}}
 </div>
 <div>
     Current page: {{products.page}}
     {{#if products.hasPrevPage}}
-    <a href="/?page={{products.prevPage}}">Prev</a>
+    <a href="/api/realTimeProducts?page={{products.prevPage}}">Prev</a>
     {{/if}}
 
     {{#if products.hasNextPage}}
-    <a href="/?page={{products.nextPage}}">Next</a>
+    <a href="/api/realTimeProducts?page={{products.nextPage}}">Next</a>
     {{/if}}
 
 </div>

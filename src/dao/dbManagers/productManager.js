@@ -59,13 +59,15 @@ class ProductManager {
                 products: [{ prodId, quantity: 1 }]
             });
         } else {
-            const existingProduct = cart.products.find(p => p.prodId === prodId);
+            const stringProdId = prodId.toString(); // Convertir ObjectId a cadena para comparación
+            const existingProduct = cart.products.find(p => p.prodId.toString() === stringProdId);
             if (existingProduct) {
                 existingProduct.quantity++;
             } else {
                 cart.products.push({ prodId, quantity: 1 });
             }
             await cart.save();
+            return cart.toObject({ virtuals: true });
         }
         return cart.toObject({ virtuals: true });
     }

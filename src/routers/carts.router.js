@@ -17,12 +17,13 @@ router.get("/:cid", async (req, res) => {
         const cartId = req.params.cid
         const getCartById = await cartManager.getCartById(cartId);
         console.log(getCartById)
-        // data = {
-        //     ...getCartById
-        // }
-        res.status(202).json({status:"succes", messege:"Products found", getCartById});
+       
+        res.render("carts" ,{
+            products : getCartById,
+            titleHead:"Carrito de compras",
+            styles:["styles.css"],
+        }) 
     } catch (error) {
-        throw error
         res.status(404).json({ status: "error", messege: "Products not found" });
     }
 })
